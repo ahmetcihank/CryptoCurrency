@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity
                         else if(cryptoDetailsFragment !=null)
                         {
                             cryptoDetailsFragment.setTetxUsdBtc(name,Id, usd, dailyChangeRate, hourChangeRate, weeklyChangeRate);
+                            cryptoDetailsFragment.setArrow(hourChangeRate, dailyChangeRate, weeklyChangeRate);
                         }
                     }
                 });
