@@ -3,24 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/frame_linear_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
-        android:id="@+id/price_usd"/>
+        android:id="@+id/price_usd"
+        android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"
-        android:id="@+id/price_btc"/>
+        android:id="@+id/price_btc"
+        android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -29,15 +33,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="30dp">
+        android:layout_marginLeft="30dp"
+        android:padding="5dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dolar Kuru"/>
+            android:text="Dolar Kuru"
+            android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/usdprice"/>
+            android:id="@+id/usdprice"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 
@@ -47,7 +54,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="9"
-        android:layout_marginLeft="30dp">
+        android:layout_marginLeft="30dp"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -70,7 +78,8 @@
                     android:id="@+id/hour_change"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2" />
+                    android:layout_weight="2"
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:id="@+id/hour_change_arrow"
@@ -89,7 +98,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Günlük Değişim"/>
+            android:text="Günlük Değişim"
+            android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +109,8 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:id="@+id/daily_change"/>
+            android:id="@+id/daily_change"
+              android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/daily_change_arrow"
@@ -119,7 +130,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Haftalık Değişim"/>
+            android:text="Haftalık Değişim"
+            android:textStyle="bold"/>
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -129,7 +141,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:id="@+id/weekly_change"/>
+                android:id="@+id/weekly_change"
+                  android:textStyle="bold"/>
 
              <ImageView
                  android:id="@+id/weekly_change_arrow"

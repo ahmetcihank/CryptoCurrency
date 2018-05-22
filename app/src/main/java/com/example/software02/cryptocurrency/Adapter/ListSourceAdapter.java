@@ -46,6 +46,15 @@ public class ListSourceAdapter  extends RecyclerView.Adapter<ListSourceHolder>
 
     @Override
     public void onBindViewHolder(ListSourceHolder holder, int position) {
+
+             // Float hourValue = Float.valueOf(hourChangeRate);
+                Float hourChange = Float.valueOf(rootObjects.get(position).getPercent_change_24h());
+                if(hourChange<0)
+                {
+                    holder.NameOfCrypto.setTextColor(R.color.cryptoRed);
+                    holder.IdOfCrypto.setTextColor(R.color.cryptoRed);
+                }
+
               holder.NameOfCrypto.setText(rootObjects.get(position).getName());
               holder.IdOfCrypto.setText(rootObjects.get(position).getId());
               holder.setItemClickListener(new ItemClickListener() {

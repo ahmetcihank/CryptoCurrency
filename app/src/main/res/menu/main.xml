@@ -6,4 +6,8 @@
         android:orderInCategory="100"
         android:title="Alert Criteria"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/search_crypto_currency"
+        android:title="search"
+        app:showAsAction="ifRoom"/>
 </menu>

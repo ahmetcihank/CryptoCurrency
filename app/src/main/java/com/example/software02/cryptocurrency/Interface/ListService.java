@@ -15,3 +15,8 @@ public interface ListService {
     @GET("v1/ticker")
     Call<List<RootObject>> getSources();
 }
+
+/*public interface EuroService{
+
+    @GET("v1/ticker/?convert")
+}*/

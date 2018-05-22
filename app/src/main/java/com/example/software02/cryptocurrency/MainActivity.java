@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.software02.cryptocurrency.Adapter.ListSourceAdapter;
 import com.example.software02.cryptocurrency.Fragment.CryptoDetailsFragment;
@@ -26,6 +30,7 @@ import com.example.software02.cryptocurrency.Model.RootObject;
 import com.example.software02.cryptocurrency.Utility.Helper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +44,10 @@ public class MainActivity extends AppCompatActivity
     Context mContext = null;
     String nameOfCrypto ="";
     String IdOfCrypto = "";
+    EditText searchCrypto = null;
+    Boolean searchTextVisibility = false;
+    List<RootObject> rootObjects = null;
+    ListSourceAdapter listSourceAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,62 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        searchCrypto = (EditText) findViewById(R.id.cryptoEditText);
 
+
+        searchCrypto.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                final String CriteriaText = charSequence.toString();
+                List<RootObject> result = rootObjects.stream().filter(p->p.getName().
+                        matches(".*"+CriteriaText+".*")).collect(Collectors.toList());
+
+                listSourceAdapter = new ListSourceAdapter(result, getBaseContext(), new ListSourceAdapter.onListClickedRowListner() {
+                    @Override
+                    public void onListSelected(String name, String Id, String usd, String dailyChangeRate, String hourChangeRate, String weeklyChangeRate) {
+
+                        CryptoDetailsFragment cryptoDetailsFragment = (CryptoDetailsFragment) getSupportFragmentManager().
+                                findFragmentById(R.id.detailsFragment);
+
+                        if(cryptoDetailsFragment == null)
+                        {
+                            CryptoDetailsFragment cryptoDetailsFragment1= new CryptoDetailsFragment();
+
+                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                            fragmentTransaction.add(R.id.detailsFragment, cryptoDetailsFragment1).
+                                    commit();
+
+
+                        }
+
+                        else if(cryptoDetailsFragment !=null)
+                        {
+                            cryptoDetailsFragment.setTetxUsdBtc(name,Id, usd, dailyChangeRate, hourChangeRate, weeklyChangeRate);
+                            cryptoDetailsFragment.setArrow(hourChangeRate, dailyChangeRate, weeklyChangeRate);
+                        }
+
+
+
+                    }
+                });
+                mainListOfCrypto.setAdapter(listSourceAdapter);
+                listSourceAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -77,8 +141,8 @@ public class MainActivity extends AppCompatActivity
         listService.getSources().enqueue(new Callback<List<RootObject>>() {
             @Override
             public void onResponse(Call<List<RootObject>> call, Response<List<RootObject>> response) {
-                List<RootObject> rootObjects = response.body();
-                ListSourceAdapter listSourceAdapter = new ListSourceAdapter(rootObjects, mContext,
+                 rootObjects = response.body();
+                 listSourceAdapter = new ListSourceAdapter(rootObjects, mContext,
                         new ListSourceAdapter.onListClickedRowListner() {
                     @Override
                     public void onListSelected(String name, String Id, String usd, String dailyChangeRate, String hourChangeRate,
@@ -158,6 +222,21 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
+        else if(id == R.id.search_crypto_currency){
+            Toast.makeText(this, "This is Criteria :)", Toast.LENGTH_SHORT).show();
+
+            if(searchTextVisibility == false)
+            {
+                searchCrypto.setVisibility(View.VISIBLE);
+                searchTextVisibility = true;
+            }
+
+            else if(searchTextVisibility == true){
+                searchCrypto.setVisibility(View.GONE);
+                searchTextVisibility = false;
+            }
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -174,10 +253,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

@@ -1,13 +1,14 @@
 package com.example.software02.cryptocurrency.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -28,8 +29,10 @@ public class CryptoDetailsFragment extends Fragment
     ImageView hourArrow = null;
     ImageView dailyArrow = null;
     ImageView weeklyArrow = null;
+    LinearLayout mainframe = null;
 
 
+    @SuppressLint("ResourceAsColor")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +46,15 @@ public class CryptoDetailsFragment extends Fragment
         hourArrow = (ImageView) view.findViewById(R.id.hour_change_arrow);
         dailyArrow = (ImageView) view.findViewById(R.id.daily_change_arrow);
         weeklyArrow = (ImageView) view.findViewById(R.id.weekly_change_arrow);
+        mainframe =(LinearLayout) view.findViewById(R.id.frame_linear_layout);
+
+      //  mainframe.setBackgroundResource(R.drawable.btc);
+        //mainframe.setBackgroundColor(R.color.cardview_shadow_end_color);
+
+        mainframe.setBackgroundColor(R.color.niceBlack);
+
         return view;
+
     }
 
 

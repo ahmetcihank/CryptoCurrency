@@ -1,5 +1,6 @@
 package com.example.software02.cryptocurrency.Adapter;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -21,11 +22,13 @@ public class ListSourceHolder extends RecyclerView.ViewHolder implements View.On
 
 
 
+    @SuppressLint("ResourceAsColor")
     public ListSourceHolder(View itemView) {
         super(itemView);
 
         NameOfCrypto = (TextView) itemView.findViewById(R.id.crypto_name);
         IdOfCrypto = (TextView) itemView.findViewById(R.id.crypto_id);
+        //NameOfCrypto.setTextColor(R.color.cryptoRed);
         itemView.setOnClickListener(this);
     }
 
